@@ -1,4 +1,10 @@
 public class Building {
+
+    private int onFloorFlatsNumbers;
+    private int entranceNumbers;
+    private int floorNumbers;
+
+    //region Setters section
     public void setEntranceNumbers(int entranceNumbers) {
         this.entranceNumbers = entranceNumbers;
     }
@@ -7,33 +13,48 @@ public class Building {
         this.floorNumbers = floorNumbers;
     }
 
-    private int entranceNumbers;
-    private int floorNumbers;
 
     public void setOnFloorFlatsNumbers(int onFloorFlatsNumbers) {
         this.onFloorFlatsNumbers = onFloorFlatsNumbers;
     }
-
-    private int onFloorFlatsNumbers;
+    //endregion
 
     public Building() {
-        this.onFloorFlatsNumbers = 0;
-        this.entranceNumbers = 0;
-        this.floorNumbers = 0;
+        this.onFloorFlatsNumbers = 1;
+        this.entranceNumbers = 1;
+        this.floorNumbers = 1;
     }
-    public boolean checkFlatInBuilding(int apartmentNumber){
-        if(apartmentNumber <= entranceNumbers*floorNumbers) return true;
-        return false;
+
+    private boolean checkFlatInBuilding(int apartmentNumber){
+        return apartmentNumber <= entranceNumbers * floorNumbers * onFloorFlatsNumbers;
 
     }
-    public int getEntranceByFlat(int apartmentNumber){
-        return (apartmentNumber-1)/onFloorFlatsNumbers*floorNumbers + 1;
+
+    private int getEntranceByFlat(int apartmentNumber){
+        var i = (apartmentNumber - 1) /(onFloorFlatsNumbers * floorNumbers) + 1;
+        return i;
     }
-    public int getFloorByFlat(int apartmentNumber){
-        return (apartmentNumber-1)%onFloorFlatsNumbers*floorNumbers/onFloorFlatsNumbers + 1;
+
+    private int getFloorByFlat(int apartmentNumber){
+        var i = ((apartmentNumber - 1) % (onFloorFlatsNumbers * floorNumbers)) / onFloorFlatsNumbers + 1;
+        return i;
     }
-    public int getFlatPositionOnFloor(int apartmentNumber){
-       return (getEntranceByFlat(apartmentNumber) - 1)*floorNumbers + (getFloorByFlat(apartmentNumber) - 1)*onFloorFlatsNumbers;
+
+    private int getFlatPositionOnFloor(int apartmentNumber){
+        var i = apartmentNumber - ((getEntranceByFlat(apartmentNumber) - 1) * floorNumbers + (getFloorByFlat(apartmentNumber) - 1) * onFloorFlatsNumbers);
+        return i;
+    }
+
+    public void getFlatInfo(int apartmentNumber){
+        if(!checkFlatInBuilding(apartmentNumber)) {
+            System.out.printf("Квартиры под номером %s нет в доме с такими параметрами", apartmentNumber);
+        } else {
+            System.out.printf("Квартира под номером %s находится в подъезде № %s, этаж - %s, положение на площадке  - %s",
+                    apartmentNumber,
+                    getEntranceByFlat(apartmentNumber),
+                    getFloorByFlat(apartmentNumber),
+                    getFlatPositionOnFloor(apartmentNumber));
+        }
     }
 }
 
