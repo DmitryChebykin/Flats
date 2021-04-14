@@ -41,7 +41,9 @@ public class Building {
     }
 
     private int getFlatPositionOnFloor(int apartmentNumber){
-        int i = apartmentNumber - ((getEntranceByFlat(apartmentNumber) - 1) * floorQuantity + (getFloorByFlat(apartmentNumber) - 1) * flatQuantityOnFloor);
+        int flatQuantityPreviousEntrance = (getEntranceByFlat(apartmentNumber) - 1) * floorQuantity * flatQuantityOnFloor;
+        int flatQuantityPreviousFloorCurrentEntrance =  (getFloorByFlat(apartmentNumber) - 1) * flatQuantityOnFloor;
+        int i = apartmentNumber - (flatQuantityPreviousEntrance + flatQuantityPreviousFloorCurrentEntrance);
         return i;
     }
 
