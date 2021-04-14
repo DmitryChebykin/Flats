@@ -5,7 +5,7 @@ public class Program {
         dto.runConsole();
         building.setEntranceQuantity(dto.getEntranceQuantity());
         building.setFloorQuantity(dto.getFloorQuantity());
-        building.setFlatQuantityOnFloor(dto.getFlatsQuantityOnFloor());
+        building.setFlatQuantityOnFloor(dto.getFlatQuantityOnFloor());
         building.getFlatInfo(dto.getApartmentNumber());
 
     }

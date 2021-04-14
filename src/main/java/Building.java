@@ -25,7 +25,7 @@ public class Building {
         this.floorQuantity = 1;
     }
 
-    private boolean checkFlatInBuilding(int apartmentNumber){
+    private boolean isFlatInBuilding(int apartmentNumber){
         return apartmentNumber <= entranceQuantity * floorQuantity * flatQuantityOnFloor;
 
     }
@@ -46,7 +46,7 @@ public class Building {
     }
 
     public void getFlatInfo(int apartmentNumber){
-        if(!checkFlatInBuilding(apartmentNumber)) {
+        if(!isFlatInBuilding(apartmentNumber)) {
             System.out.printf("Квартиры под номером %s нет в доме с такими параметрами", apartmentNumber);
         } else {
             System.out.printf("Квартира под номером %s находится в подъезде № %s, этаж - %s, положение на площадке  - %s",
