@@ -3,22 +3,22 @@ import java.util.Scanner;
 
 public class Request {
 
-    private int onFloorFlatsNumbers;
-    private int entranceNumbers;
-    private int floorNumbers;
+    private int flatsQuantityOnFloor;
+    private int entranceQuantity;
+    private int floorQuantity;
     private int apartmentNumber;
 
     //region Getters section
-    public int getOnFloorFlatsNumbers() {
-        return onFloorFlatsNumbers;
+    public int getFlatsQuantityOnFloor() {
+        return flatsQuantityOnFloor;
     }
 
-    public int getEntranceNumbers() {
-        return entranceNumbers;
+    public int getEntranceQuantity() {
+        return entranceQuantity;
     }
 
-    public int getFloorNumbers() {
-        return floorNumbers;
+    public int getFloorQuantity() {
+        return floorQuantity;
     }
 
     public int getApartmentNumber() {
@@ -34,8 +34,8 @@ public class Request {
             System.out.println("Введите количество подъездов:");
             try {
                 Scanner sc = new Scanner(System.in);
-                entranceNumbers = sc.nextInt();
-                if (entranceNumbers < 0) throw new IllegalArgumentException();
+                entranceQuantity = sc.nextInt();
+                if (entranceQuantity < 0) throw new IllegalArgumentException();
                 rightInput = false;
 
             } catch (IllegalArgumentException | InputMismatchException e) {
@@ -49,8 +49,8 @@ public class Request {
             System.out.println("Введите количество этажей:");
             try {
                 Scanner sc = new Scanner(System.in);
-                floorNumbers = sc.nextInt();
-                if (entranceNumbers < 0) throw new IllegalArgumentException();
+                floorQuantity = sc.nextInt();
+                if (entranceQuantity < 0) throw new IllegalArgumentException();
 
                 rightInput = false;
 
@@ -65,8 +65,8 @@ public class Request {
             System.out.println("Введите количество квартир на площадке:");
             try {
                 Scanner sc = new Scanner(System.in);
-                onFloorFlatsNumbers = sc.nextInt();
-                if (onFloorFlatsNumbers < 0) throw new IllegalArgumentException();
+                flatsQuantityOnFloor = sc.nextInt();
+                if (flatsQuantityOnFloor < 0) throw new IllegalArgumentException();
 
                 rightInput = false;
 

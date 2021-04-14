@@ -31,17 +31,17 @@ public class Building {
     }
 
     private int getEntranceByFlat(int apartmentNumber){
-        var i = (apartmentNumber - 1) /(onFloorFlatsNumbers * floorNumbers) + 1;
+        int i = (apartmentNumber - 1) /(onFloorFlatsNumbers * floorNumbers) + 1;
         return i;
     }
 
     private int getFloorByFlat(int apartmentNumber){
-        var i = ((apartmentNumber - 1) % (onFloorFlatsNumbers * floorNumbers)) / onFloorFlatsNumbers + 1;
+        int i = ((apartmentNumber - 1) % (onFloorFlatsNumbers * floorNumbers)) / onFloorFlatsNumbers + 1;
         return i;
     }
 
     private int getFlatPositionOnFloor(int apartmentNumber){
-        var i = apartmentNumber - ((getEntranceByFlat(apartmentNumber) - 1) * floorNumbers + (getFloorByFlat(apartmentNumber) - 1) * onFloorFlatsNumbers);
+        int i = apartmentNumber - ((getEntranceByFlat(apartmentNumber) - 1) * floorNumbers + (getFloorByFlat(apartmentNumber) - 1) * onFloorFlatsNumbers);
         return i;
     }
 
