@@ -3,9 +3,9 @@ public class Program {
         Building building = new Building();
         Request dto = new Request();
         dto.runConsole();
-        building.setEntranceNumbers(dto.getEntranceQuantity());
-        building.setFloorNumbers(dto.getFloorQuantity());
-        building.setOnFloorFlatsNumbers(dto.getFlatsQuantityOnFloor());
+        building.setEntranceQuantity(dto.getEntranceQuantity());
+        building.setFloorQuantity(dto.getFloorQuantity());
+        building.setFlatQuantityOnFloor(dto.getFlatsQuantityOnFloor());
         building.getFlatInfo(dto.getApartmentNumber());
 
     }

@@ -1,47 +1,47 @@
 public class Building {
 
-    private int onFloorFlatsNumbers;
-    private int entranceNumbers;
-    private int floorNumbers;
+    private int flatQuantityOnFloor;
+    private int entranceQuantity;
+    private int floorQuantity;
 
     //region Setters section
-    public void setEntranceNumbers(int entranceNumbers) {
-        this.entranceNumbers = entranceNumbers;
+    public void setEntranceQuantity(int entranceQuantity) {
+        this.entranceQuantity = entranceQuantity;
     }
 
-    public void setFloorNumbers(int floorNumbers) {
-        this.floorNumbers = floorNumbers;
+    public void setFloorQuantity(int floorQuantity) {
+        this.floorQuantity = floorQuantity;
     }
 
 
-    public void setOnFloorFlatsNumbers(int onFloorFlatsNumbers) {
-        this.onFloorFlatsNumbers = onFloorFlatsNumbers;
+    public void setFlatQuantityOnFloor(int flatQuantityOnFloor) {
+        this.flatQuantityOnFloor = flatQuantityOnFloor;
     }
     //endregion
 
     public Building() {
-        this.onFloorFlatsNumbers = 1;
-        this.entranceNumbers = 1;
-        this.floorNumbers = 1;
+        this.flatQuantityOnFloor = 1;
+        this.entranceQuantity = 1;
+        this.floorQuantity = 1;
     }
 
     private boolean checkFlatInBuilding(int apartmentNumber){
-        return apartmentNumber <= entranceNumbers * floorNumbers * onFloorFlatsNumbers;
+        return apartmentNumber <= entranceQuantity * floorQuantity * flatQuantityOnFloor;
 
     }
 
     private int getEntranceByFlat(int apartmentNumber){
-        int i = (apartmentNumber - 1) /(onFloorFlatsNumbers * floorNumbers) + 1;
+        int i = (apartmentNumber - 1) /(flatQuantityOnFloor * floorQuantity) + 1;
         return i;
     }
 
     private int getFloorByFlat(int apartmentNumber){
-        int i = ((apartmentNumber - 1) % (onFloorFlatsNumbers * floorNumbers)) / onFloorFlatsNumbers + 1;
+        int i = ((apartmentNumber - 1) % (flatQuantityOnFloor * floorQuantity)) / flatQuantityOnFloor + 1;
         return i;
     }
 
     private int getFlatPositionOnFloor(int apartmentNumber){
-        int i = apartmentNumber - ((getEntranceByFlat(apartmentNumber) - 1) * floorNumbers + (getFloorByFlat(apartmentNumber) - 1) * onFloorFlatsNumbers);
+        int i = apartmentNumber - ((getEntranceByFlat(apartmentNumber) - 1) * floorQuantity + (getFloorByFlat(apartmentNumber) - 1) * flatQuantityOnFloor);
         return i;
     }
 
