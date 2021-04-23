@@ -1,96 +1,75 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Request {
-
     private int flatsQuantityOnFloor;
-    private int entranceQuantity;
-    private int floorQuantity;
-    private int apartmentNumber;
+    private int entrancesQuantity;
+    private int floorsQuantity;
+    private int flatNumber;
 
-    //region Getters section
     public int getFlatsQuantityOnFloor() {
         return flatsQuantityOnFloor;
     }
 
-    public int getEntranceQuantity() {
-        return entranceQuantity;
+    public void setFlatsQuantityOnFloor(int flatsQuantityOnFloor) {
+        this.flatsQuantityOnFloor = flatsQuantityOnFloor;
     }
 
-    public int getFloorQuantity() {
-        return floorQuantity;
+    public int getEntrancesQuantity() {
+        return entrancesQuantity;
     }
 
-    public int getApartmentNumber() {
-        return apartmentNumber;
+    public void setEntrancesQuantity(int entrancesQuantity) {
+        this.entrancesQuantity = entrancesQuantity;
     }
-    //endregion
+
+    public int getFloorsQuantity() {
+        return floorsQuantity;
+    }
+
+    public void setFloorsQuantity(int floorsQuantity) {
+        this.floorsQuantity = floorsQuantity;
+    }
+
+    public int getFlatNumber() {
+        return flatNumber;
+    }
+
+    public void setFlatNumber(int flatNumber) {
+        this.flatNumber = flatNumber;
+    }
 
     public void runConsole() {
-        boolean rightInput = true;
+        entrancesQuantity = getNumber("Введите количество подъездов:", "Неверный ввод. Для задания подъездов введите положительное целое число.");
+        floorsQuantity = getNumber("Введите количество этажей:", "Неверный ввод. Для задания этажей введите положительное целое число.");
+        flatsQuantityOnFloor = getNumber("Введите количество квартир на площадке:", "Неверный ввод. Для задания количества квартир на площадке введите положительное целое число.");
+        flatNumber = getNumber("Введите номер квартиры:", "Неверный ввод. Для задания номера квартиры введите положительное целое число.");
+    }
 
-        //region Handling entrance input
-        while (rightInput) {
-            System.out.println("Введите количество подъездов:");
-            try {
-                Scanner sc = new Scanner(System.in);
-                entranceQuantity = sc.nextInt();
-                if (entranceQuantity < 0) throw new IllegalArgumentException();
-                rightInput = false;
+    private int getNumber(String inputMessage, String errorMessage) {
+        boolean isRightInput = false;
 
-            } catch (IllegalArgumentException | InputMismatchException e) {
-                System.out.println("Неверный ввод. Для задания подъездов введите положительное целое число.");
+        Scanner scanner = new Scanner(System.in);
+
+        int inputNumber = 0;
+
+        while (!isRightInput) {
+            System.out.println(inputMessage);
+
+            if (scanner.hasNextInt()) {
+                inputNumber = scanner.nextInt();
+
+                if (inputNumber <= 0) {
+                    System.out.println(errorMessage);
+                    continue;
+                }
+
+                isRightInput = true;
+            } else {
+                System.out.println(errorMessage);
+                scanner.nextLine();
             }
         }
-        //endregion
-        rightInput = true;
-        //region Handling floors input
-        while (rightInput) {
-            System.out.println("Введите количество этажей:");
-            try {
-                Scanner sc = new Scanner(System.in);
-                floorQuantity = sc.nextInt();
-                if (entranceQuantity < 0) throw new IllegalArgumentException();
 
-                rightInput = false;
-
-            } catch (IllegalArgumentException | InputMismatchException e) {
-                System.out.println("Неверный ввод. Для задания этажей введите положительное целое число.");
-            }
-        }
-        //endregion
-        rightInput = true;
-        //region Handling flats on the floor input
-        while (rightInput) {
-            System.out.println("Введите количество квартир на площадке:");
-            try {
-                Scanner sc = new Scanner(System.in);
-                flatsQuantityOnFloor = sc.nextInt();
-                if (flatsQuantityOnFloor < 0) throw new IllegalArgumentException();
-
-                rightInput = false;
-
-            } catch (IllegalArgumentException | InputMismatchException e) {
-                System.out.println("Неверный ввод. Для задания количества квартир на площадке введите положительное целое число.");
-            }
-        }
-        //endregion
-        rightInput = true;
-        //region Handling flats on the floor input
-        while (rightInput) {
-            System.out.println("Введите номер квартиры:");
-            try {
-                Scanner sc = new Scanner(System.in);
-                apartmentNumber = sc.nextInt();
-                if (apartmentNumber < 0) throw new IllegalArgumentException();
-
-                rightInput = false;
-
-            } catch (IllegalArgumentException | InputMismatchException e) {
-                System.out.println("Неверный ввод. Для задания количества квартир на площадке введите положительное целое число.");
-            }
-        }
-        //endregion
-
+        return inputNumber;
     }
 }

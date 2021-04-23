@@ -1,62 +1,71 @@
 public class Building {
+    public static final String[] FLAT_POSITIONS_DESCRIPTIONS = {"ближняя слева", "дальняя слева", "дальняя справа", "ближняя справа"};
 
-    private int flatQuantityOnFloor;
-    private int entranceQuantity;
-    private int floorQuantity;
+    private int flatsQuantityOnFloor;
+    private int entrancesQuantity;
+    private int floorsQuantity;
 
-    //region Setters section
-    public void setEntranceQuantity(int entranceQuantity) {
-        this.entranceQuantity = entranceQuantity;
+    public Building(int flatsQuantityOnFloor, int entrancesQuantity, int floorsQuantity) {
+        this.flatsQuantityOnFloor = flatsQuantityOnFloor;
+        this.entrancesQuantity = entrancesQuantity;
+        this.floorsQuantity = floorsQuantity;
     }
 
-    public void setFloorQuantity(int floorQuantity) {
-        this.floorQuantity = floorQuantity;
+    public int getFlatsQuantityOnFloor() {
+        return flatsQuantityOnFloor;
     }
 
-
-    public void setFlatQuantityOnFloor(int flatQuantityOnFloor) {
-        this.flatQuantityOnFloor = flatQuantityOnFloor;
-    }
-    //endregion
-
-    public Building() {
-        this.flatQuantityOnFloor = 1;
-        this.entranceQuantity = 1;
-        this.floorQuantity = 1;
+    public void setFlatsQuantityOnFloor(int flatsQuantityOnFloor) {
+        this.flatsQuantityOnFloor = flatsQuantityOnFloor;
     }
 
-    private boolean isFlatInBuilding(int apartmentNumber){
-        return apartmentNumber <= entranceQuantity * floorQuantity * flatQuantityOnFloor;
-
+    public int getEntrancesQuantity() {
+        return entrancesQuantity;
     }
 
-    private int getEntranceByFlat(int apartmentNumber){
-        int i = (apartmentNumber - 1) /(flatQuantityOnFloor * floorQuantity) + 1;
-        return i;
+    public void setEntrancesQuantity(int entrancesQuantity) {
+        this.entrancesQuantity = entrancesQuantity;
     }
 
-    private int getFloorByFlat(int apartmentNumber){
-        int i = ((apartmentNumber - 1) % (flatQuantityOnFloor * floorQuantity)) / flatQuantityOnFloor + 1;
-        return i;
+    public int getFloorsQuantity() {
+        return floorsQuantity;
     }
 
-    private int getFlatPositionOnFloor(int apartmentNumber){
-        int flatQuantityPreviousEntrance = (getEntranceByFlat(apartmentNumber) - 1) * floorQuantity * flatQuantityOnFloor;
-        int flatQuantityPreviousFloorCurrentEntrance =  (getFloorByFlat(apartmentNumber) - 1) * flatQuantityOnFloor;
-        int i = apartmentNumber - (flatQuantityPreviousEntrance + flatQuantityPreviousFloorCurrentEntrance);
-        return i;
+    public void setFloorsQuantity(int floorsQuantity) {
+        this.floorsQuantity = floorsQuantity;
     }
 
-    public void getFlatInfo(int apartmentNumber){
-        if(!isFlatInBuilding(apartmentNumber)) {
-            System.out.printf("Квартиры под номером %s нет в доме с такими параметрами", apartmentNumber);
+    private boolean isFlatInBuilding(int flatNumber) {
+        return flatNumber <= entrancesQuantity * floorsQuantity * flatsQuantityOnFloor;
+    }
+
+    private int getEntranceNumberForFlat(int flatNumber) {
+        return (flatNumber - 1) / (flatsQuantityOnFloor * floorsQuantity) + 1;
+    }
+
+    private int getFloorNumberForFlat(int flatNumber) {
+        return ((flatNumber - 1) % (flatsQuantityOnFloor * floorsQuantity)) / flatsQuantityOnFloor + 1;
+    }
+
+    private int getFlatDigitalPositionOnFloor(int flatNumber) {
+        int flatsQuantityInPreviousEntrances = (getEntranceNumberForFlat(flatNumber) - 1) * floorsQuantity * flatsQuantityOnFloor;
+        int flatsQuantityInPreviousFloorsAtCurrentEntrance = (getFloorNumberForFlat(flatNumber) - 1) * flatsQuantityOnFloor;
+        return flatNumber - (flatsQuantityInPreviousEntrances + flatsQuantityInPreviousFloorsAtCurrentEntrance);
+    }
+
+    public void printFlatInfo(int flatNumber) {
+        if (!isFlatInBuilding(flatNumber)) {
+            System.out.printf("Квартиры под номером %s нет в доме с такими параметрами", flatNumber);
         } else {
-            System.out.printf("Квартира под номером %s находится в подъезде № %s, этаж - %s, положение на площадке  - %s",
-                    apartmentNumber,
-                    getEntranceByFlat(apartmentNumber),
-                    getFloorByFlat(apartmentNumber),
-                    getFlatPositionOnFloor(apartmentNumber));
+            System.out.printf(
+                    "Квартира под номером %d находится в подъезде №%d, этаж - %d, положение на площадке порядковое - %d%n",
+                    flatNumber, getEntranceNumberForFlat(flatNumber), getFloorNumberForFlat(flatNumber),
+                    getFlatDigitalPositionOnFloor(flatNumber));
+
+            if (flatsQuantityOnFloor == 4) {
+                System.out.printf("Или по другому, эта квартира - %s.",
+                        FLAT_POSITIONS_DESCRIPTIONS[getFlatDigitalPositionOnFloor(flatNumber) - 1]);
+            }
         }
     }
 }
-
